@@ -1,4 +1,4 @@
-#include "../include/sound-system.hh"
+#include "../include/detector.hh"
 
 int main(int argc, char** argv)
 {
@@ -8,7 +8,8 @@ int main(int argc, char** argv)
     system.load(argv[1]);
     system.start();
     system.pause();
-    float* spectrum = system.spectrum_get();
+    Detector detect(system);
+    float* spectrum = detect.system_get().spectrum_get();
     for (int i = 0; i < SPECTRUM_SIZE; i++)
         std::cout << spectrum[i] << std::endl;
     return 0;
