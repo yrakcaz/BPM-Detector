@@ -1,7 +1,10 @@
 #ifndef SOUND_SYSTEM_HH
 # define SOUND_SYSTEM_HH
 
+# include <iostream>
 # include "FMOD/fmod.h"
+
+# define SPECTRUM_SIZE 8192
 
 class SoundSystem
 {
@@ -10,6 +13,7 @@ class SoundSystem
         ~SoundSystem();
 
         void load(const char* path);
+        void start();
         void play();
         void pause();
 
@@ -21,8 +25,8 @@ class SoundSystem
         float speed_get() const;
         void speed_set(float speed);
 
-        int position_get() const;
-        void position_set(int position);
+        unsigned int position_get() const;
+        void position_set(unsigned int position);
 
     private:
         FMOD_SYSTEM* sys_;

@@ -35,8 +35,74 @@ void SoundSystem::load(const char* path)
     FMOD_Sound_Unlock(sound_, addr1, addr2, len1, len2);
 }
 
-void SoundSystem::play()
+void SoundSystem::start()
 {
     FMOD_System_PlaySound(sys_, FMOD_CHANNEL_FREE, sound_, 0, 0);
     FMOD_System_GetChannel(sys_, 0, &chan_);
+}
+
+void SoundSystem::play()
+{
+    FMOD_BOOL state;
+    FMOD_Channel_GetPaused(chan_, &state);
+    FMOD_Channel_SetFrequency(chan_, 44100.f * speed_);
+    if (state)
+        FMOD_Channel_SetPaused(chan_, 0);
+}
+
+void SoundSystem::pause()
+{
+    FMOD_BOOL state;
+    FMOD_Channel_GetPaused(chan_, &state);
+    FMOD_Channel_SetFrequency(chan_, 44100.f * speed_);
+    if (!state)
+        FMOD_Channel_SetPaused(chan_, 1);
+}
+
+int* SoundSystem::left_data_get()
+{
+    return left_data_;
+}
+
+int* SoundSystem::right_data_get()
+{
+    return right_data_;
+}
+
+float* SoundSystem::spectrum_get()
+{
+    FMOD_System_Update(sys_);
+    float* spectrum = new float[SPECTRUM_SIZE + 1];
+    FMOD_Channel_GetSpectrum(chan_, spectrum, SPECTRUM_SIZE,
+                             position_get(), FMOD_DSP_FFT_WINDOW_TRIANGLE);
+    return spectrum;
+}
+
+unsigned int SoundSystem::len_get() const
+{
+    return len_;
+}
+
+float SoundSystem::speed_get() const
+{
+    return speed_;
+}
+
+void SoundSystem::speed_set(float speed)
+{
+    pause();
+    speed_ = speed;
+    play();
+}
+
+unsigned int SoundSystem::position_get() const
+{
+    unsigned int ret = 0;
+    FMOD_Channel_GetPosition(chan_, &ret, FMOD_TIMEUNIT_PCM);
+    return ret;
+}
+
+void SoundSystem::position_set(unsigned int position)
+{
+    FMOD_Channel_SetPosition(chan_, position, FMOD_TIMEUNIT_PCM);
 }

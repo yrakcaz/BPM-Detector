@@ -6,6 +6,10 @@ int main(int argc, char** argv)
         return 1;
     SoundSystem system;
     system.load(argv[1]);
-    system.play();
+    system.start();
+    system.pause();
+    float* spectrum = system.spectrum_get();
+    for (int i = 0; i < SPECTRUM_SIZE; i++)
+        std::cout << spectrum[i] << std::endl;
     return 0;
 }
