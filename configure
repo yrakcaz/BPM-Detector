@@ -1,0 +1,38 @@
+#! /bin/sh
+PREF=prefix
+if [ $# -eq 0 ]; then
+    echo -n "" > makefile.rules
+elif [ $# -eq 1 ]; then
+    if [ $1 = "--with-debug" ]; then
+        echo "CXXFLAGS+=-g3" > makefile.rules
+    elif [ $1 = "--with-clang" ]; then
+        echo "CXX=clang" > makefile.rules
+    elif [ $1 = "--help" ]; then
+        echo "./configure: --with-debug (debug mode)"
+        echo "             --with-clang   (compile with clang)"
+    elif echo $1 | grep -qF $PREF; then
+        echo "DIR=${1#*=}" > makefile.rules
+    else
+        echo "use ./configure --help"
+    fi
+elif [ $# -eq 2 ]; then
+    if [ $1 = "--with-debug" ]; then
+        if [ $2 = "--with-clang" ]; then
+            echo "CXXFLAGS+=-g3" > makefile.rules
+            echo "CXX=clang" >> makefile.rules
+        else
+            echo "use ./configure --help"
+        fi
+    elif [ $1 = "--with-clang" ]; then
+        if [ $2 = "--with-debug" ]; then
+            echo "CXXFLAGS+=-g3" > makefile.rules
+            echo "CXX=clang" >> makefile.rules
+        else
+          echo "use ./configure --help"
+        fi
+    else
+        echo "use ./configure --help"
+    fi
+else
+    echo "use ./configure --help"
+fi
