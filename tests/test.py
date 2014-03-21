@@ -33,8 +33,9 @@ def treat(f):
         success = False
         if (val > item[1] - 5 and val < item[1] + 5):
             success = True
-        print("Song : " + item[0])
-        print("Expected BPM : " + str(item[1]))
+        print("\033[35mSong : \033[0m" + item[0])
+        print("\033[35mResult : \033[0m" + out[:len(out)-1])
+        print("\033[35mExpected : \033[0m" + str(item[1]))
         if (success):
             nbsucc += 1
             print("\033[32m\033[1m[SUCCESS]\033[0m\033[0m\n")
