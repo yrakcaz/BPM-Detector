@@ -18,7 +18,8 @@ $(EXE): $(OBJ)
 clean:
 	rm -f $(OBJ) $(EXE) $(TAR).tar.bz2
 
-#check: all
+check: all
+	tests/test.py
 
 distclean: clean
 	rm -f makefile.rules
