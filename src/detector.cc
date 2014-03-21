@@ -9,6 +9,7 @@ Detector::Detector(SoundSystem& system)
     , nrj1024_(system.len_get(), 0.f)
     , nrj44100_(system.len_get(), 0.f)
     , peaks_(system.len_get(), false)
+    , laps_(system.len_get(), 0)
 {
 }
 
@@ -48,9 +49,46 @@ void Detector::peaks_set()
             peaks_[i] = true;
 }
 
-int Detector::tempo_get()
+void Detector::laps_set()
 {
     peaks_set();
-    //FIXME
-    return 0;
+    int prec = 0;
+    for (unsigned int i = 0; i < system_.len_get() / 1024; i++)
+    {
+        if (peaks_[i] && !peaks_[i - 1])
+        {
+            int d = i - prec;
+            if (d > 5)
+            {
+                laps_.push_back(d);
+                prec = i;
+            }
+        }
+    }
+}
+
+float Detector::bpm_get()
+{
+    laps_set();
+    std::vector<int> occ(86, 0);
+    for (unsigned int i = 1; i < laps_.size(); i++)
+        if (laps_[i] <= 86)
+            occ[laps_[i]]++;
+    int tmax = 0;
+    int max = 0;
+    float moy = 0.f;
+    for (int i = 1; i < 86; i++)
+    {
+        if (occ[i] > max)
+        {
+            tmax = i;
+            max = occ[i];
+        }
+    }
+    int prec = tmax - 1;
+    if (occ[tmax + 1] > occ[prec])
+        prec = tmax + 1;
+    float div = occ[tmax] + occ[prec];
+    moy = !div ? div : (float)(tmax * occ[tmax] + prec * occ[prec]) / div;
+    return 60.0f / (moy * (1024.f / 44100.f));
 }

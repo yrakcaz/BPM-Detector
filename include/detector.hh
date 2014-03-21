@@ -15,17 +15,19 @@ class Detector
         ~Detector();
 
         SoundSystem& system_get();
-        int tempo_get();
+        float bpm_get();
 
     private:
         int nrj_get(int* data, int offset);
         void peaks_set();
+        void laps_set();
 
     private:
         SoundSystem system_;
         std::vector<float> nrj1024_;
         std::vector<float> nrj44100_;
         std::vector<bool> peaks_;
+        std::vector<int> laps_;
 };
 
 #endif /* !DETECTOR_HH */

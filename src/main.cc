@@ -1,16 +1,22 @@
 #include "../include/detector.hh"
+#include "../include/args.hh"
 
 int main(int argc, char** argv)
 {
-    if (argc < 2)
+    Args args(argc, argv);
+    args.push_arg("--display");
+    args.compute();
+    int pos;
+    if ((pos = args.map_get()["--display"]) != 0 && argc >= pos)
+    {
+        SoundSystem system;
+        system.load(argv[pos + 1]);
+        system.start();
+        system.pause();
+        Detector detect(system);
+        std::cout << detect.bpm_get() << std::endl;
+    }
+    else
         return 1;
-    SoundSystem system;
-    system.load(argv[1]);
-    system.start();
-    system.pause();
-    Detector detect(system);
-    float* spectrum = detect.system_get().spectrum_get();
-    for (int i = 0; i < SPECTRUM_SIZE; i++)
-        std::cout << spectrum[i] << std::endl;
     return 0;
 }
