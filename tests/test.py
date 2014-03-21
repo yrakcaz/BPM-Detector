@@ -6,6 +6,9 @@ import json
 def main():
     argv = sys.argv
     argc = len(argv)
+    print("\033[34m\033[1m======================================\033[0m\033[0m")
+    print("\033[34m\033[1m          TESTS BPM-Detector          \033[0m\033[0m")
+    print("\033[34m\033[1m======================================\033[0m\033[0m\n")
     treat("tests/tests.txt")
 
 def parse_file(f):
