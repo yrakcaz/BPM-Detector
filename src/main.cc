@@ -6,10 +6,10 @@ int main(int argc, char** argv)
     Args args(argc, argv);
     args.push_arg("--display");
     args.compute();
+    SoundSystem system;
     int pos;
     if ((pos = args.map_get()["--display"]) != 0 && argc >= pos)
     {
-        SoundSystem system;
         system.load(argv[pos + 1]);
         system.start();
         system.pause();

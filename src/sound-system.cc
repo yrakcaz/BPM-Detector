@@ -30,6 +30,8 @@ void SoundSystem::load(const char* path)
     {
         left_data_[i] = ((int*)addr1)[i] >> 16;
         right_data_[i] = (((int*)addr1)[i] << 16) >> 16;
+        //std::cout << "Left: " << left_data_[i] << std::endl;
+        //std::cout << "Right: " << right_data_[i] << std::endl;
         i++;
     }
     FMOD_Sound_Unlock(sound_, addr1, addr2, len1, len2);

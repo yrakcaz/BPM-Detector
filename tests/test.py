@@ -27,7 +27,7 @@ def treat(f):
                                bufsize = 0, stdout = subprocess.PIPE, stdin = subprocess.PIPE)
         out, err = sub.communicate()
         i = 0
-        while out[i] != '.':
+        while out[i] != '\n' and out[i] != '.':
             i+=1
         val = int(out[:i])
         success = False
