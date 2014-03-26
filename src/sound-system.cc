@@ -77,6 +77,16 @@ float* SoundSystem::spectrum_get()
     return spectrum;
 }
 
+int SoundSystem::moy_get()
+{
+    int* data = left_data_get();
+    int moy = 0;
+    int i;
+    for (i = 0; data[i]; i++)
+        moy += data[i];
+    return -(moy / i);
+}
+
 unsigned int SoundSystem::len_get() const
 {
     return len_;

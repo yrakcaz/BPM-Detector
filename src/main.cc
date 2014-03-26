@@ -5,6 +5,7 @@ int main(int argc, char** argv)
 {
     Args args(argc, argv);
     args.push_arg("--display");
+    args.push_arg("--moy");
     args.compute();
     SoundSystem system;
     int pos;
@@ -16,6 +17,8 @@ int main(int argc, char** argv)
         Detector detect(system);
         std::cout << detect.bpm_get() << std::endl;
     }
+    else if ((pos = args.map_get()["--moy"]) != 0 && argc >= pos)
+        std::cout << system.moy_get() << std::endl;
     else
         return 1;
     return 0;
