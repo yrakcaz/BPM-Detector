@@ -84,7 +84,7 @@ int SoundSystem::moy_get()
     int i;
     for (i = 0; data[i]; i++)
         moy += data[i];
-    return -(moy / i);
+    return moy / i;
 }
 
 unsigned int SoundSystem::len_get() const
