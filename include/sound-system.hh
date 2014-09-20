@@ -2,7 +2,7 @@
 # define SOUND_SYSTEM_HH
 
 # include <iostream>
-# include "FMOD/fmod.h"
+# include "fmod.h"
 
 # define SPECTRUM_SIZE 8192
 

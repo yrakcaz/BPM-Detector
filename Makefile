@@ -1,6 +1,6 @@
 EXE=BPMDetector
 CXX=g++
-CXXFLAGS=-Wall -Wextra -Werror -std=c++11 -pedantic -lfmodex64
+CXXFLAGS=-Wall -Wextra -Werror -std=c++11 -pedantic -lfmodex64-4.44.43
 SRC=src/detector.cc src/sound-system.cc src/args.cc src/main.cc
 OBJ=$(SRC:.cc=.o)
 TAR=yrakcaz-bpmdetector
