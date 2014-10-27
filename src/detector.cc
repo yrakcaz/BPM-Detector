@@ -71,7 +71,9 @@ void Detector::laps_set()
 double Detector::bpm_get()
 {
     laps_set();
-    std::vector<int> occ(86, 0);
+    int occ[86];
+    for (int i = 0; i < 86; i++)
+        occ[i] = 0;
     for (unsigned int i = 1; i < laps_.size(); i++)
         if (laps_[i] <= 86)
             occ[laps_[i]]++;
