@@ -68,6 +68,17 @@ void Detector::laps_set()
     }
 }
 
+double Detector::normalize(double bpm)
+{
+    if (bpm < 70)
+        while (bpm < 70)
+            bpm *= 2;
+    else if (bpm > 200)
+        while (bpm > 200)
+            bpm /= 2;
+    return bpm;
+}
+
 double Detector::bpm_get()
 {
     laps_set();
@@ -93,5 +104,5 @@ double Detector::bpm_get()
         prec = tmax + 1;
     double div = occ[tmax] + occ[prec];
     moy = !div ? 0 : (double)((tmax * occ[tmax]) + (prec * occ[prec])) / div;
-    return 60.f / (moy * (1024.f / 44100.f));
+    return normalize(60.f / (moy * (1024.f / 44100.f)));
 }

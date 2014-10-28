@@ -21,6 +21,7 @@ class Detector
         int nrj_get(int* data, int offset);
         void peaks_set();
         void laps_set();
+        double normalize(double bpm);
 
     private:
         SoundSystem system_;

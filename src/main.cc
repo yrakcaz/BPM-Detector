@@ -1,25 +1,23 @@
+#include <cstring>
 #include "../include/detector.hh"
-#include "../include/args.hh"
 
 int main(int argc, char** argv)
 {
-    Args args(argc, argv);
-    args.push_arg("--display");
-    args.push_arg("--moy");
-    args.compute();
-    SoundSystem system;
-    int pos;
-    if ((pos = args.map_get()["--display"]) != 0 && argc >= pos)
+    if (argc != 2)
     {
-        system.load(argv[pos + 1]);
+        std::cerr << argv[0] << ": use " << argv[0] << " -h or --help." << std::endl;
+        return 1;
+    }
+    else if (!strcmp(argv[1], "-h") || !strcmp(argv[1], "--help"))
+        std::cout << argv[0] << ": usage: " << argv[0] << " <SONG FILE>." << std::endl;
+    else
+    {
+        SoundSystem system;
+        system.load(argv[1]);
         system.start();
         system.pause();
         Detector detect(system);
         std::cout << detect.bpm_get() << std::endl;
     }
-    else if ((pos = args.map_get()["--moy"]) != 0 && argc >= pos)
-        std::cout << system.moy_get() << std::endl;
-    else
-        return 1;
     return 0;
 }

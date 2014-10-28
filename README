@@ -1,4 +1,14 @@
 BPM-Detector
 ============
 
-Tool to get the BPM of a song then eventually sort it.
+Useful tool to extract the BPM of an any-format song file.
+
+Build:
+    ./configure && make
+
+Usage:
+    ./BPMDetector <SONG FILE>
+
+- The make check command works with a JSON Array containing arrays with file and bpm.
+
+- The test.sh script is only able to calculate bpm of every songs of a directory, then put results into a log file.

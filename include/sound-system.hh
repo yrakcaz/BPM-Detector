@@ -20,7 +20,6 @@ class SoundSystem
         int* left_data_get();
         int* right_data_get();
         float* spectrum_get();
-        int moy_get();
         unsigned int len_get() const;
 
         float speed_get() const;

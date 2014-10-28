@@ -23,7 +23,7 @@ def treat(f):
     nbsucc = 0
     for item in parse_file(f):
         nbtests += 1
-        sub = subprocess.Popen(["sh", "-c", "./BPMDetector --display " + item[0]],
+        sub = subprocess.Popen(["sh", "-c", "./BPMDetector " + item[0]],
                                bufsize = 0, stdout = subprocess.PIPE, stdin = subprocess.PIPE)
         out, err = sub.communicate()
         i = 0
