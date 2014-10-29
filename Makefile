@@ -4,6 +4,7 @@ CXXFLAGS=-Wall -Wextra -Werror -std=c++11 -pedantic -lfmodex64-4.44.43
 SRC=src/detector.cc src/sound-system.cc src/main.cc
 OBJ=$(SRC:.cc=.o)
 TAR=yrakcaz-bpmdetector
+DIR=/usr/bin
 
 -include makefile.rules
 
@@ -21,10 +22,25 @@ clean:
 check: all
 	tests/test.py
 
-distclean: clean
+cleandoc:
+	rm -rf doc/html doc/latex doc/refman.pdf
+
+distclean: clean cleandoc
 	rm -f makefile.rules
+
+doc:
+	doxygen doc/Doxyfile
+	$(MAKE) -C doc/latex
+	mv doc/latex/refman.pdf doc/
+
+install:
+ifeq ($(DIR),/usr/bin)
+	sudo cp $(EXE) $(DIR)
+else
+	cp $(EXE) $(DIR)
+endif
 
 export:
 	git archive HEAD --prefix=$(TAR)/ | bzip2 > $(TAR).tar.bz2
 
-.PHONY: all clean distclean export
+.PHONY: all clean distclean export doc

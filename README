@@ -4,7 +4,10 @@ BPM-Detector
 Useful tool to extract the BPM of an any-format song file.
 
 Build:
-    ./configure && make
+    ./configure [--prefix=<INSTALL DIR>] && make
+
+Install:
+    make install
 
 Usage:
     ./BPMDetector <SONG FILE>
