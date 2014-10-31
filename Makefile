@@ -1,9 +1,9 @@
-EXE=BPMDetector
+EXE=musical-feature-extractor
 CXX=g++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++11 -pedantic -lfmodex64-4.44.43
 SRC=src/detector.cc src/sound-system.cc src/main.cc
 OBJ=$(SRC:.cc=.o)
-TAR=yrakcaz-bpmdetector
+TAR=yrakcaz-$(EXE)
 DIR=/usr/bin
 
 -include makefile.rules

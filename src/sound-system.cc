@@ -14,7 +14,12 @@ SoundSystem::~SoundSystem()
 
 void SoundSystem::load(const char* path)
 {
-    FMOD_System_CreateSound(sys_, path, FMOD_SOFTWARE | FMOD_2D, 0, &sound_);
+    int result = FMOD_System_CreateSound(sys_, path, FMOD_SOFTWARE | FMOD_2D, 0, &sound_);
+    if (result != FMOD_OK)
+    {
+        fprintf(stderr, "musical-feature-extractor: %s: no such file or directory\n", path);
+        exit(1);
+    }
     FMOD_Sound_SetLoopCount(sound_, -1);
     FMOD_Sound_GetLength(sound_, &len_, FMOD_TIMEUNIT_PCM);
     left_data_ = new int[len_];

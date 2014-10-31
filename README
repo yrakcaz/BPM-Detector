@@ -1,7 +1,7 @@
-BPM-Detector
-============
+musical-feature-extractor
+=========================
 
-Useful tool to extract the BPM of an any-format song file.
+Useful tool to extract features from an any-format song file.
 
 Build:
     ./configure [--prefix=<INSTALL DIR>] && make
@@ -10,8 +10,4 @@ Install:
     make install
 
 Usage:
-    ./BPMDetector <SONG FILE>
-
-- The make check command works with a JSON Array containing arrays with file and bpm.
-
-- The test.sh script is only able to calculate bpm of every songs of a directory, then put results into a log file.
+    ./musical-feature-extractor --help
