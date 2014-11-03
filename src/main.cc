@@ -1,6 +1,5 @@
 #include <cstring>
 #include "../include/detector.hh"
-#include "../include/extractor.hh"
 
 int main(int argc, char** argv)
 {
@@ -16,15 +15,6 @@ int main(int argc, char** argv)
             system.pause();
             Detector detect(system);
             std::cout << detect.bpm_get() << std::endl;
-        }
-        else if (!strcmp(argv[1], "-c") || !strcmp(argv[1], "--centroid"))
-        {
-            SoundSystem system;
-            system.load(argv[2]);
-            system.start();
-            system.pause();
-            Extractor extract(system);
-            std::cout << extract.centroid_get() << std::endl;
         }
         else
         {

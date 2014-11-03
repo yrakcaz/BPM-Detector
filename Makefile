@@ -1,7 +1,7 @@
 EXE=musical-feature-extractor
 CXX=g++
 CXXFLAGS=-Wall -Wextra -Werror -std=c++11 -pedantic -lfmodex64-4.44.43
-SRC=src/detector.cc src/sound-system.cc src/extractor.cc src/main.cc
+SRC=src/detector.cc src/sound-system.cc src/main.cc
 OBJ=$(SRC:.cc=.o)
 TAR=yrakcaz-$(EXE)
 DIR=/usr/bin
